@@ -23,13 +23,12 @@ class PokemonProvider with ChangeNotifier {
           final speciesData = json.decode(speciesResponse.body);
           final imageUrl = speciesData['sprites']['front_default']; // 画像URL
           final speciesDetailUrl = speciesData['species']['url']; // 種の詳細URL
-          
+
           final detailResponse = await http.get(Uri.parse(speciesDetailUrl));
           if (detailResponse.statusCode == 200) {
             final detailData = json.decode(detailResponse.body);
             final jpName = detailData['names']
-                .firstWhere((name) => name['language']['name'] == 'ja')
-                ['name'];
+                .firstWhere((name) => name['language']['name'] == 'ja')['name'];
             pokemonData.add({
               'name': jpName,
               'imageUrl': imageUrl,

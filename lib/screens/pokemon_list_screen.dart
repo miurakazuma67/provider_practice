@@ -13,8 +13,8 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<PokemonProvider>(context, listen: false).fetchPokemonList());
+    Future.microtask(() => Provider.of<PokemonProvider>(context, listen: false)
+        .fetchPokemonList());
   }
 
   @override
@@ -41,6 +41,18 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
                         const Icon(Icons.image_not_supported),
                   ),
                   title: Text(pokemon['name'] ?? ''),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PokemonDetailScreen(
+                          name: pokemon['name']!,
+                          imageUrl: pokemon['imageUrl']!,
+                          types: pokemon['types'] ?? [], // ポケモンのタイプ情報を渡す
+                        ),
+                      ),
+                    );
+                  },
                 );
               },
             ),
