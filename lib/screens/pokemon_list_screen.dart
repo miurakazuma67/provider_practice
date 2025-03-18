@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/pokemon_provider.dart';
+import 'pokemon_detail_screen.dart'; // Add this import
 
 class PokemonListScreen extends StatefulWidget {
   const PokemonListScreen({super.key});
@@ -48,7 +49,7 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
                         builder: (context) => PokemonDetailScreen(
                           name: pokemon['name']!,
                           imageUrl: pokemon['imageUrl']!,
-                          types: pokemon['types'] ?? [], // ポケモンのタイプ情報を渡す
+                          types: (pokemon['types'] as List<dynamic>).cast<String>(), // ポケモンのタイプ情報を渡す
                         ),
                       ),
                     );
